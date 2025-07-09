@@ -8,7 +8,7 @@ module.exports = function videoHandlers(io, socket) {
   socket.on("send-offer", ({ from, to, offer, fromUserName }) => {
     console.log("from : ", from, " to : ", to);
 
-    console.log("offer came and sending offer : ", offer);
+    // console.log("offer came and sending offer : ", offer);
 
     console.log(
       "Emitting to socket:",
@@ -20,7 +20,7 @@ module.exports = function videoHandlers(io, socket) {
     io.to(to).emit("receive-offer", {
       fromSocketId: socket.id,
       fromUserId: from,
-      fromUserName,
+      fromUserName, // thinking sam means change in frontend i.e get
       offer,
     });
 
@@ -44,8 +44,7 @@ module.exports = function videoHandlers(io, socket) {
   });
 
   // Toggle audio/video
-  socket.on("media-toggle", ({ isMuted, videoOff }) => {
-    const roomId = getRoomIdBySocketId(socket.id);
+  socket.on("media-toggle", ({ isMuted, videoOff, roomId }) => {
     if (!roomId) return;
 
     // Broadcast new media state to others in the room
