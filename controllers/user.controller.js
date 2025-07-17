@@ -46,6 +46,8 @@ module.exports.registerUser = async (req, res) => {
     return res
       .cookie("token", token, {
         httpOnly: true,
+        secure: true,
+        sameSite: "None",
         maxAge: 5 * 24 * 60 * 60 * 1000,
       })
       .status(201)
@@ -94,6 +96,8 @@ module.exports.loginUser = async (req, res) => {
     return res
       .cookie("token", token, {
         httpOnly: true,
+        secure: true,
+        sameSite: "None",
         maxAge: 5 * 24 * 60 * 60 * 1000,
       })
       .status(200)
@@ -179,6 +183,8 @@ exports.googleAuth = async (req, res) => {
     return res
       .cookie("token", token, {
         httpOnly: true,
+        secure: true,
+        sameSite: "None",
         maxAge: 5 * 24 * 60 * 60 * 1000,
       })
       .status(200)
