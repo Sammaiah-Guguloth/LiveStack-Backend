@@ -35,4 +35,39 @@ router.get(
   roomController.getRoomById
 );
 
+router.put(
+  "/update-code",
+  authMiddlware.authUser,
+  [
+    body("roomId", "Room ID is required").notEmpty(),
+    body("code", "Code is required").notEmpty(),
+  ],
+  roomController.updateCode
+);
+
+router.get(
+  "/my/rooms",
+  authMiddlware.authUser,
+  roomController.getPaginatedRooms
+);
+
+router.get(
+  "/my/rooms-by-name/:roomName",
+  authMiddlware.authUser,
+  [param("roomName", "roomName is required").notEmpty()],
+  roomController.getRoomsByRoomName
+);
+
+// update the code only admin can update
+router.put(
+  "/update-code-admin",
+  authMiddlware.authUser,
+  authMiddlware.authRoomAdmin,
+  [
+    body("roomId", "Room ID is required").notEmpty(),
+    body("code", "Code is required").notEmpty(),
+  ],
+  roomController.updateCodeByAdmin
+);
+
 module.exports = router;

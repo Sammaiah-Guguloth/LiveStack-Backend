@@ -40,7 +40,7 @@ module.exports = function roomHandlers(io, socket) {
       .exec()
       .catch((err) => console.log(err));
 
-    console.log(`${user.firstName}  joined room `);
+    // console.log(`${user.firstName}  joined room `);
 
     // Notify others in the room that user joined
     // socket.to(roomId).emit("user-joined", user);
@@ -80,7 +80,7 @@ module.exports = function roomHandlers(io, socket) {
       updatedMembers,
       user,
     });
-    console.log("sent");
+    // console.log("sent");
   });
 
   // Handle socket disconnecting - remove user from all rooms they are in

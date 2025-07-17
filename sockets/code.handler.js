@@ -20,6 +20,12 @@ module.exports = function codeHandlers(io, socket, rooms) {
     });
   });
 
+  // socket.on("user-typing", ({ roomId, userName }) => {;
+  //   io.in(roomId).emit("user-typing", {
+  //     userName,
+  //   });
+  // });
+
   // socket.on("code-edit", ({ roomId, code }) => {
   //   // Broadcast to all except sender
   //   socket.to(roomId).emit("code-updated", code);
@@ -34,7 +40,7 @@ module.exports = function codeHandlers(io, socket, rooms) {
   // Save code request (if needed)
   socket.on("save-code", ({ roomId, code }) => {
     // You can implement save logic here (DB or file)
-    console.log(`Save code for room ${roomId}`);
+    // console.log(`Save code for room ${roomId}`);
     // Acknowledge to user
     socket.emit("code-saved", { success: true });
   });

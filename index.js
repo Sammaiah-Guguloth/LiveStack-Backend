@@ -8,6 +8,7 @@ const http = require("http");
 
 const userRoutes = require("./routes/user.routes");
 const roomRoutes = require("./routes/room.routes");
+const noteRoutes = require("./routes/note.routes");
 const { createSocketServer } = require("./sockets/socket");
 
 const app = express();
@@ -31,6 +32,7 @@ app.get("/", (req, res) => {
 // routes
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/room", roomRoutes);
+app.use("/api/v1/note", noteRoutes);
 
 // configs
 connectToDB();
@@ -41,5 +43,5 @@ const server = require("http").createServer(app);
 const io = createSocketServer(server);
 
 server.listen(PORT, () => {
-  console.log(`Server is listening on http://localhost:${PORT}/`);
+  console.log(`Server is listening on ${PORT} `);
 });

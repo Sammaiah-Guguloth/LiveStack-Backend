@@ -22,6 +22,10 @@ const roomSchema = new mongoose.Schema(
       },
     ],
 
+    code: {
+      type: String,
+    },
+
     description: {
       type: String,
     },

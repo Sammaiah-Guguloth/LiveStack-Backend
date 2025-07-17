@@ -21,7 +21,7 @@ function createSocketServer(server) {
   });
 
   io.on("connection", (socket) => {
-    console.log("New socket connected: ", socket.id);
+    // console.log("New socket connected: ", socket.id);
 
     registerRoomHandlers(io, socket);
     registerCodeHandlers(io, socket);
@@ -39,7 +39,7 @@ function createSocketServer(server) {
 
         const updatedMembers = getMembersByRoomId(roomId);
 
-        console.log("removed user : ", removedMember);
+        // console.log("removed user : ", removedMember);
 
         // socket.to(roomId).emit("user-left", removed);
         io.in(roomId).emit("user-left", {
@@ -48,11 +48,12 @@ function createSocketServer(server) {
           user: removedMember,
         });
 
-        console.log(`${removedMember.firstName} left room ${roomId}`);
+        // console.log(`${removedMember.firstName} left room ${roomId}`);
 
-        console.log("Socket disconnected: ", socket.id);
+        // console.log("Socket disconnected: ", socket.id);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
+        // this has to be seriouly addressed ...
       }
     });
   });

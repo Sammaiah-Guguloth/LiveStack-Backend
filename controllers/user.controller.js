@@ -198,3 +198,37 @@ exports.googleAuth = async (req, res) => {
     return res.status(401).json({ errors: [{ msg: err.message }] });
   }
 };
+
+exports.updateProfile = async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { firstName, lastName } = req.body;
+    const userId = req.user._id;
+    const user = await userModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ errors: [{ msg: "User not found" }] });
+    }
+    user.firstName = firstName.trim();
+    user.lastName = lastName.trim();
+
+    await user.save();
+
+    return res.status(200).json({
+      message: "Profile updated successfully",
+      user: {
+        _id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        profileImage: user.profileImage,
+      },
+    });
+  } catch (error) {
+    console.error("Profile update error:", error);
+    res.status(500).json({ errors: [{ msg: error.message }] });
+  }
+};
